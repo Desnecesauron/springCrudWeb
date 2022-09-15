@@ -8,7 +8,7 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Long id;
     String nome;
     int filhos;
     double salario;
@@ -16,18 +16,18 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String nome, int filhos, double salario) {
+    public Person(Long id, String nome, int filhos, double salario) {
         this.id = id;
         this.nome = nome;
         this.filhos = filhos;
         this.salario = salario;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
