@@ -1,5 +1,7 @@
 package com.mstech.dev.examples.crud.entities;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @Column(nullable = false)
     String nome;
     int filhos;
     double salario;

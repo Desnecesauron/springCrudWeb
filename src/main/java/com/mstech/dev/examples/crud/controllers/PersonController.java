@@ -3,16 +3,12 @@ package com.mstech.dev.examples.crud.controllers;
 import com.mstech.dev.examples.crud.entities.Person;
 import com.mstech.dev.examples.crud.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @RequestMapping(value = "/listPersons")
@@ -32,7 +28,18 @@ public class PersonController {
     public ResponseEntity<Person> findPerson(@PathVariable Long id)
     {
         Person person= personService.findPerson(id);
-        return ResponseEntity.ok().body(person);
+        return ResponseEntity.ok().body( person);
+    }
+
+    @PostMapping(value = "/ins",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Person> insertPerson(@RequestBody Person newPerson)
+    {
+        boolean success = personService.savePerson(newPerson);
+        if(success)
+            return ResponseEntity.ok().body(newPerson);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
 }
