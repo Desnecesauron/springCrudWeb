@@ -10,20 +10,34 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @Column(nullable = false)
-    String nome;
-    int filhos;
-    double salario;
+    private String nome;
+    @Column(unique = true, nullable = false)
+    private long cpf;
+    @Column(nullable = false)
+    private boolean excluido = false;
+    private String endereco;
+    private int cep;
+    private String cidade;
+    @Column(nullable = false)
+    private boolean medico;
+    private String crm;
+    //CRM/SP 123456
 
     public Person() {
     }
 
-    public Person(Long id, String nome, int filhos, double salario) {
+    public Person(Long id, String nome, long cpf, boolean excluido, String endereco, int cep, String cidade, boolean medico, String crm) {
         this.id = id;
         this.nome = nome;
-        this.filhos = filhos;
-        this.salario = salario;
+        this.cpf = cpf;
+        this.excluido = excluido;
+        this.endereco = endereco;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.medico = medico;
+        this.crm = crm;
     }
 
     public Long getId() {
@@ -42,19 +56,59 @@ public class Person {
         this.nome = nome;
     }
 
-    public int getFilhos() {
-        return filhos;
+    public long getCpf() {
+        return cpf;
     }
 
-    public void setFilhos(int filhos) {
-        this.filhos = filhos;
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
     }
 
-    public double getSalario() {
-        return salario;
+    public boolean isExcluido() {
+        return excluido;
     }
 
-    public void setSalario(double salario) {
-        this.salario = salario;
+    public void setExcluido(boolean excluido) {
+        this.excluido = excluido;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getCep() {
+        return cep;
+    }
+
+    public void setCep(int cep) {
+        this.cep = cep;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public boolean isMedico() {
+        return medico;
+    }
+
+    public void setMedico(boolean medico) {
+        this.medico = medico;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
     }
 }

@@ -19,8 +19,8 @@ public class TestConfig implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-        Person p1= new Person(null, "Jorge", 3, 2500.52);
-        Person p2= new Person(null, "Cleber", 6, 600.37);
+        Person p1= new Person(null, "Jorge", 46546546542L, false, "Rua Joaquim Anacleto 1-20", 17047220, "Bauru", false, "");
+        Person p2= new Person(null, "Cleber", 46546546555L, false, "Rua Joaquim Anacleto 1-20", 17047200, "Agudos", true, "CRM/SP 123456");
 
         personRepository.saveAll(Arrays.asList(p1, p2));
     }
