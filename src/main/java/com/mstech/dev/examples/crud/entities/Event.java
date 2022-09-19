@@ -1,29 +1,26 @@
 package com.mstech.dev.examples.crud.entities;
 
 import com.mstech.dev.examples.crud.entities.enums.scheduleTimes;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "events")
-public class event
+public class Event
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    //https://stackoverflow.com/questions/52004135/spring-boot-jpa-how-to-implement-foreign-key-between-users-and-authorities-table
-    private Person patient; //falta criar a chave estrangeira aqui e criar na outra "tabela" a ligação
-    private Person medic; //falta criar a chave estrangeira aqui e criar na outra "tabela" a ligação
+    private Long id_event;
+    @OneToOne
+    private Person patient;
+    @OneToOne
+    private Person medic;
     private scheduleTimes hour;
     private LocalDate dayEvent;
-
-    public event() {
+    public Event() {
     }
 
-    public event(Person patient, Person medic, scheduleTimes hour, LocalDate dayEvent) {
+    public Event(Person patient, Person medic, scheduleTimes hour, LocalDate dayEvent) {
         if(medic.isMedico() && !(patient.isMedico()))
         {
             this.patient = patient;

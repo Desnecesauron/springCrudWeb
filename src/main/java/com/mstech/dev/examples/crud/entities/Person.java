@@ -3,9 +3,10 @@ package com.mstech.dev.examples.crud.entities;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "Persons")
+@Table(name = "persons")
 public class Person {
 
     @Id

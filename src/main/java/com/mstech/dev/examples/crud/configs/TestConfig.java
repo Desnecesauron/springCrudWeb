@@ -1,6 +1,7 @@
 package com.mstech.dev.examples.crud.configs;
 
 import com.mstech.dev.examples.crud.entities.Person;
+import com.mstech.dev.examples.crud.repositories.EventRepository;
 import com.mstech.dev.examples.crud.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,6 +17,9 @@ public class TestConfig implements CommandLineRunner
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private EventRepository eventRepository;
 
     @Override
     public void run(String... args) throws Exception {
