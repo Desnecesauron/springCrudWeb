@@ -1,10 +1,8 @@
 package com.mstech.dev.examples.crud.service;
 
 import com.mstech.dev.examples.crud.entities.Event;
-import com.mstech.dev.examples.crud.entities.Event;
 import com.mstech.dev.examples.crud.exceptions.DataNotFoundException;
 import com.mstech.dev.examples.crud.exceptions.DataNotPossibleException;
-import com.mstech.dev.examples.crud.repositories.EventRepository;
 import com.mstech.dev.examples.crud.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

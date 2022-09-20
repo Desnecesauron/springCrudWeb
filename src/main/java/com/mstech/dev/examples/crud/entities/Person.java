@@ -1,13 +1,17 @@
 package com.mstech.dev.examples.crud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "persons")
-public class Person {
+@Table(name = "tb_persons")
+public class Person implements Serializable
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +29,10 @@ public class Person {
     private boolean medico;
     private String crm;
     //CRM/SP 123456
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "medic")
+    private List<Event> events = new ArrayList<>();
 
     public Person() {
     }
@@ -111,5 +119,9 @@ public class Person {
 
     public void setCrm(String crm) {
         this.crm = crm;
+    }
+
+    public List<Event> getEvents() {
+        return events;
     }
 }

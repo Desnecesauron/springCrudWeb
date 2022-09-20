@@ -31,6 +31,11 @@ public class PersonController {
         return ResponseEntity.ok().body( person);
     }
 
+    public Person returnPerson(Long id)
+    {
+        return personService.findPerson(id);
+    }
+
     @PostMapping(value = "/ins",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
