@@ -124,4 +124,20 @@ public class Person implements Serializable
     public List<Event> getEvents() {
         return events;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf=" + cpf +
+                ", excluido=" + excluido +
+                ", endereco='" + endereco + '\'' +
+                ", cep=" + cep +
+                ", cidade='" + cidade + '\'' +
+                ", medico=" + medico +
+                ", crm='" + crm + '\'' +
+                ", events=" + events +
+                '}';
+    }
 }

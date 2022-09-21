@@ -37,6 +37,8 @@ public class EventController
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Event> insertEvent(@RequestBody Event newEvent)
     {
+        System.out.println("entrou");
+        System.out.println(""+newEvent.toString());
         boolean success = eventService.saveEvent(newEvent);
         if(success)
             return ResponseEntity.ok().body(newEvent);

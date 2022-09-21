@@ -26,32 +26,40 @@ public class Event implements Serializable
     {
 
     }
-    public Event(Person patient, Person medic, scheduleTimes hour_event, LocalDate dayEvent)
-    {
-        if(medic.isMedico() && !(patient.isMedico()))
+    public Event(Person patient, Person medic, scheduleTimes hour_event, LocalDate dayEvent) throws Exception {
+        if(medic.isMedico())
         {
+            this.id_event = null;
             this.patient = patient;
             this.medic = medic;
             this.hour_event = hour_event;
             this.dayEvent = dayEvent;
         }
+        else
+        {
+            throw new Exception("Element not created: medic person is not a medic!");
+        }
     }
-    /*
-    public Event(Long patientId, Long medicId, scheduleTimes hour_event, LocalDate dayEvent)
-    {
+
+    public Event(Long patientId, Long medicId, scheduleTimes hour_event, LocalDate dayEvent) throws Exception {
         PersonController personController = new PersonController();
         Person patient = personController.returnPerson(patientId);
         Person medic = personController.returnPerson(medicId);
 
-        if(medic.isMedico() && !(patient.isMedico()))
+        if(medic.isMedico())
         {
+            this.id_event = null;
             this.patient = patient;
             this.medic = medic;
             this.hour_event = hour_event;
             this.dayEvent = dayEvent;
         }
+        else
+        {
+            throw new Exception("Element not created: medic person is not a medic!");
+        }
     }
-    */
+
     public Person getPatient()
     {
         return patient;
@@ -83,5 +91,16 @@ public class Event implements Serializable
     public void setDayEvent(LocalDate dayEvent)
     {
         this.dayEvent = dayEvent;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id_event=" + id_event +
+                ", hour_event=" + hour_event +
+                ", dayEvent=" + dayEvent +
+                ", patient=" + patient +
+                ", medic=" + medic +
+                '}';
     }
 }
