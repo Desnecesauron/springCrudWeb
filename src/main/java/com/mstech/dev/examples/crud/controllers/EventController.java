@@ -20,8 +20,6 @@ public class EventController
 
     @Autowired
     private EventService eventService;
-    @Autowired
-    private PersonRepository personRepository;
 
     @GetMapping
     public ResponseEntity<List<Event>> listEvents()
