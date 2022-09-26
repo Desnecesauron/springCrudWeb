@@ -27,6 +27,11 @@ public class PersonService
         Optional<Person> obj = personRepository.findById(id);
         return obj.orElseThrow(() -> new DataNotFoundException(id));
     }
+ /*   public Person findPersonCPF(Long cpf)
+    {
+        Optional<Person> obj = personRepository.find(id);
+        return obj.orElseThrow(() -> new DataNotFoundException(id));
+    }*/
 
     public boolean savePerson(Person person)
     {

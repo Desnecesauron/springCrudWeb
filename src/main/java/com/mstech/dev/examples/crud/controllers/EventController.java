@@ -1,6 +1,9 @@
 package com.mstech.dev.examples.crud.controllers;
 
 import com.mstech.dev.examples.crud.entities.Event;
+import com.mstech.dev.examples.crud.entities.Person;
+import com.mstech.dev.examples.crud.exceptions.DataNotPossibleException;
+import com.mstech.dev.examples.crud.repositories.PersonRepository;
 import com.mstech.dev.examples.crud.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,8 @@ public class EventController
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private PersonRepository personRepository;
 
     @GetMapping
     public ResponseEntity<List<Event>> listEvents()
@@ -37,9 +42,26 @@ public class EventController
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Event> insertEvent(@RequestBody Event newEvent)
     {
+        if(newEvent.getMedic().getNome()==null  || newEvent.getMedic().getCpf()==0 || newEvent.getMedic().getEndereco()==null  || newEvent.getMedic().getCep()==0 || newEvent.getMedic().getCidade()==null || newEvent.getMedic().getCrm()==null)
+        {
+            throw new DataNotPossibleException("All data from medic is necessary!");
+        }
+        if(newEvent.getPatient().getNome()==null  || newEvent.getPatient().getCpf()==0 || newEvent.getPatient().getEndereco()==null  || newEvent.getPatient().getCep()==0 || newEvent.getPatient().getCidade()==null || newEvent.getPatient().getCrm()==null)
+        {
+            throw new DataNotPossibleException("All data from patient is necessary!");
+        }
+        System.out.println(newEvent);
+
+        //do the checks for cannot save any event with "blank vars"
+        if(newEvent.getMedic().getId().equals(newEvent.getPatient().getId()))
+            throw new DataNotPossibleException("An medical appointment cannot be made by you and yourself!");
+        if(!(newEvent.getMedic().isMedico()))
+            throw new DataNotPossibleException("An medical appointment cannot be made by a patient");
+
         System.out.println("entrou");
         System.out.println(""+newEvent.toString());
         boolean success = eventService.saveEvent(newEvent);
+        System.out.println("Saiu");
         if(success)
             return ResponseEntity.ok().body(newEvent);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

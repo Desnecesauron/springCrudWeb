@@ -2,18 +2,19 @@ package com.mstech.dev.examples.crud.entities;
 
 import com.mstech.dev.examples.crud.controllers.PersonController;
 import com.mstech.dev.examples.crud.entities.enums.scheduleTimes;
-import com.mstech.dev.examples.crud.service.PersonService;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
+
 @Entity
 @Table(name = "tb_events")
 public class Event implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_event;
+    private Long id;
     private scheduleTimes hour_event;
     private LocalDate dayEvent;
     @ManyToOne
@@ -29,7 +30,7 @@ public class Event implements Serializable
     public Event(Person patient, Person medic, scheduleTimes hour_event, LocalDate dayEvent) throws Exception {
         if(medic.isMedico())
         {
-            this.id_event = null;
+            this.id = null;
             this.patient = patient;
             this.medic = medic;
             this.hour_event = hour_event;
@@ -48,7 +49,7 @@ public class Event implements Serializable
 
         if(medic.isMedico())
         {
-            this.id_event = null;
+            this.id = null;
             this.patient = patient;
             this.medic = medic;
             this.hour_event = hour_event;
@@ -60,6 +61,13 @@ public class Event implements Serializable
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public Person getPatient()
     {
         return patient;
@@ -96,7 +104,7 @@ public class Event implements Serializable
     @Override
     public String toString() {
         return "Event{" +
-                "id_event=" + id_event +
+                "id=" + id +
                 ", hour_event=" + hour_event +
                 ", dayEvent=" + dayEvent +
                 ", patient=" + patient +
