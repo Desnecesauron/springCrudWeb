@@ -1,0 +1,58 @@
+
+<div class="main">
+
+  <div class="header">
+
+    <strong>Crud clinical</strong>
+    <strong>Clinic Plus</strong>
+
+  </div>
+
+  <div class="loginPanel">
+  <div class="forms">
+
+    Dados para o formulário:
+    <div class="checkDataNome">
+      Nome: {{dataForm.nome}}
+    </div>
+    
+    
+    <div class="checkDataCpf">
+      Cpf: {{dataForm.cpf}}
+    </div>
+    
+    <div class="textNome">
+      <input type="text" placeholder="Nome" [(ngModel)]="dataForm.nome">
+    </div>
+
+    <div class="textCpf">
+
+      <input type="text" id="CpfText" placeholder="cpf" input="mascara(this);" [(ngModel)]="dataForm.cpf" [value]="dataForm.cpf | cpf">
+    </div>
+    
+    
+    
+    <div class="btnLogin">
+      <button (click)="postLogin();">
+        Login
+      </button>
+    </div>
+
+    <div class="cadastrar">
+      Ainda não tem cadastro? <a routerLink="">Cadastre-se</a> na Clinic plus!
+    </div>
+
+    <li *ngFor="let item of itens">
+      {{item | cpf }}
+  </li>
+
+  </div>
+  </div>
+
+  <div class="footer">
+
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>
