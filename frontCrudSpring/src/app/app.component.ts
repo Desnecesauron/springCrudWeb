@@ -1,23 +1,4 @@
 import { Component } from '@angular/core';
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({ name: 'cpf' })
-export class CpfPipe implements PipeTransform {
-    transform(value: string|number): string {
-        let valorFormatado = value + '';
-
-        valorFormatado = valorFormatado
-            .padStart(11, '0')                  // item 1
-            .substring(0, 11)                      // item 2
-            .replace(/[^0-9]/, '')              // item 3
-            .replace(                           // item 4
-                /(\d{3})(\d{3})(\d{3})(\d{2})/,
-                '$1.$2.$3-$4'
-            );
-
-        return valorFormatado;
-    }
-}
 
 @Component({
   selector: 'app-root',
@@ -25,38 +6,140 @@ export class CpfPipe implements PipeTransform {
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent
+{
   title = 'frontCrudSpring';
 
   public dataForm:{ nome:string, cpf:any} = {nome:"", cpf:""};
 
   public postLogin()
   {
-    console.log("aaaaa");
-    alert("aaaaa");
+    if(!(this.nameVerify()))
+    {
+      return;
+    }
     return;
   }
-/*
-  public mascara()
+
+  public formatCpf()
   {
+    const input = document.getElementById('CpfText') as HTMLInputElement | null;
+    const value = input?.value;
 
-    var i = document.getElementById("CpfText");
-
-    var v = i.value;
-   
-   if(isNaN(v[v.length-1])){ // impede entrar outro caractere que não seja número
-      i.value = v.substring(0, v.length-1);
+    if(value=="")
+    {
       return;
-   }
-   
-   i.setAttribute("maxlength", "14");
-   if (v.length == 3 || v.length == 7) i.value += ".";
-   if (v.length == 11) i.value += "-";
+    }
 
+    let valorFormatado = value + '';
+
+    if(valorFormatado.includes("."))
+    {
+      valorFormatado =  valorFormatado.replace(".","");
+      valorFormatado =  valorFormatado.replace("-","");
+      valorFormatado+="0";
+    }
+    
+    valorFormatado = valorFormatado
+    .padStart(11, '0')                  // item 1
+    .substring(0, 11)                      // item 2
+    .replace(/[^0-9]/, '')              // item 3
+    .replace(                           // item 4
+        /(\d{3})(\d{3})(\d{3})(\d{2})/,
+        '$1.$2.$3-$4'
+    );
+  
+    this.dataForm.cpf=valorFormatado;  
+    return valorFormatado;
 
   }
 
-  */
+  public desformatCpf()
+  {
+    const input = document.getElementById('CpfText') as HTMLInputElement | null;
+    var value = input?.value;
+
+    if(value=="" || value==null)
+    {
+      return;
+    }
+
+    let valorFormatado = value + '';
+
+    do
+    {
+      if(valorFormatado.includes(".") || valorFormatado.includes("-"))
+      {
+        valorFormatado =  valorFormatado.replace(".","");
+        valorFormatado =  valorFormatado.replace("-","");
+      }
+      else
+      {
+        break;
+      }
+    }while (true);
+    if(valorFormatado.includes("."))
+    {
+      valorFormatado =  valorFormatado.replace(".","");
+      valorFormatado =  valorFormatado.replace(".","");
+      valorFormatado =  valorFormatado.replace(".","");
+      valorFormatado =  valorFormatado.replace("-","");
+      valorFormatado =  valorFormatado.replace("-","");
+    }
+    value = valorFormatado;
+
+    var i=0;
+    while (value[i])
+    {
+      if(value[i]!="0")
+      {
+        break;
+      }
+      else
+      {
+        i++;
+      }
+    }
+    value = value.substring(i);
+    valorFormatado = value;
+    
+    this.dataForm.cpf=valorFormatado;  
+    return valorFormatado;
+  }
+
+  public nameVerify():boolean
+  {
+    const me = document.getElementById('NameText') as HTMLInputElement | null;
+    var broke = false;
+
+    if(me?.value=="")
+    {
+      return true;
+    }
+
+    if(me==null)
+    {
+      return false;
+    }
+
+    if(!(this.onlyLetters(me.value)))
+    {
+      alert("Existe caracteres especiais no nome!!!")
+    }
+    else
+    {
+      return true;
+    }
+
+    return false;
+  }
+
+
+  public  onlyLetters(str:string):boolean {
+    str = str.trim().toLowerCase();
+    return /^[a-zA-Z\s]+$/.test(str);
+  }
+
 
 }
 

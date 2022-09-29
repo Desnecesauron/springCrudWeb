@@ -22,19 +22,18 @@
     </div>
     
     <div class="textNome">
-      <input type="text" placeholder="Nome" [(ngModel)]="dataForm.nome">
+      <input type="text" id="NameText" required="" placeholder="Nome" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();">
     </div>
 
     <div class="textCpf">
-
-      <input type="text" id="CpfText" placeholder="cpf" input="mascara(this);" [(ngModel)]="dataForm.cpf" [value]="dataForm.cpf | cpf">
+      <input type="text" id="CpfText" required="" placeholder="CPF" input="mascara(this);" [(ngModel)]="dataForm.cpf" (focusout)="formatCpf();" (focus)="desformatCpf();" >
     </div>
     
     
     
-    <div class="btnLogin">
-      <button (click)="postLogin();">
-        Login
+    <div class="btnLogin button--pandora">
+      <button id="loginBtn" (click)="postLogin();">
+        <span>Login</span>
       </button>
     </div>
 
@@ -42,9 +41,6 @@
       Ainda não tem cadastro? <a routerLink="">Cadastre-se</a> na Clinic plus!
     </div>
 
-    <li *ngFor="let item of itens">
-      {{item | cpf }}
-  </li>
 
   </div>
   </div>
