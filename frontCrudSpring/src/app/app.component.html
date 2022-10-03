@@ -1,0 +1,54 @@
+
+<div class="main">
+
+  <div class="header">
+
+    <strong>Crud clinical</strong>
+    <strong>Clinic Plus</strong>
+
+  </div>
+
+  <div class="loginPanel">
+  <div class="forms">
+
+    Dados para o formulário:
+    <div class="checkDataNome">
+      Nome: {{dataForm.nome}}
+    </div>
+    
+    
+    <div class="checkDataCpf">
+      Cpf: {{dataForm.cpf}}
+    </div>
+    
+    <div class="textNome">
+      <input type="text" id="NameText" required="" placeholder="Nome" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();">
+    </div>
+
+    <div class="textCpf">
+      <input type="text" id="CpfText" required="" placeholder="CPF" input="mascara(this);" [(ngModel)]="dataForm.cpf" (focusout)="formatCpf();" (focus)="desformatCpf();" >
+    </div>
+    
+    
+    
+    <div class="btnLogin button--pandora">
+      <button id="loginBtn" (click)="postLogin();">
+        <span>Login</span>
+      </button>
+    </div>
+
+    <div class="cadastrar">
+      Ainda não tem cadastro? <a routerLink="">Cadastre-se</a> na Clinic plus!
+    </div>
+
+
+  </div>
+  </div>
+
+  <div class="footer">
+
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>
