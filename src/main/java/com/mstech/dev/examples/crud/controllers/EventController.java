@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(maxAge = 360000)
 @RestController
 @RequestMapping(value = "/listEvents")
 public class EventController
