@@ -11,25 +11,22 @@
   <div class="loginPanel">
   <div class="forms">
 
-    Dados para o formulário:
-    <div class="checkDataNome">
-      Nome: {{dataForm.nome}}
-    </div>
-    
-    
-    <div class="checkDataCpf">
-      Cpf: {{dataForm.cpf}}
-    </div>
-    
-    <div class="textNome">
-      <input type="text" id="NameText" required="" placeholder="Nome" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();">
-    </div>
+    <div class="box">
+      <div class="textNome">
+        <div class="titleInput">Nome</div>
+        <input type="text" id="NameText" required="" placeholder="Nome" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();" (keyup)="formatName();">
+      </div>
 
-    <div class="textCpf">
-      <input type="text" id="CpfText" required="" placeholder="CPF" input="mascara(this);" [(ngModel)]="dataForm.cpf" (focusout)="formatCpf();" (focus)="desformatCpf();" >
+      <div class="textCpf">
+        <div class="titleInput">CPF</div>
+        <input type="text" id="CpfText" required="" placeholder="CPF" [(ngModel)]="dataForm.cpf" (keyup)="formatCpf();" (keydown)="desformatCpf();" >
+      </div>
+
+      <div class="textPassword">
+        <div class="titleInput">Senha</div>
+        <input type="password" id="PasswordText" required="" placeholder="Senha" [(ngModel)]="dataForm.password" >
+      </div>
     </div>
-    
-    
     
     <div class="btnLogin button--pandora">
       <button id="loginBtn" (click)="postLogin();">
@@ -40,7 +37,6 @@
     <div class="cadastrar">
       Ainda não tem cadastro? <a routerLink="">Cadastre-se</a> na Clinic plus!
     </div>
-
 
   </div>
   </div>

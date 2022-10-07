@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,12 @@ export class AppComponent
 {
   title = 'frontCrudSpring';
 
-  public dataForm:{ nome:string, cpf:any} = {nome:"", cpf:""};
+  public dataForm:{ nome:string, cpf:any, password:string} = {nome:"", cpf:"", password:""};
 
   public postLogin()
   {
+    console.log(this.dataForm)
+
     if(!(this.nameVerify()))
     {
       return;
@@ -37,20 +40,55 @@ export class AppComponent
   public formatCpf()
   {
     const input = document.getElementById('CpfText') as HTMLInputElement | null;
-    const value = input?.value;
+    var value = input?.value;
 
-    if(value=="")
+    if(value=="" || value==null)
     {
+      return;
+    }
+    
+    if(value.trim()=="")
+    {
+      value = value.trim();
+      this.dataForm.cpf= value;
       return;
     }
 
     let valorFormatado = value + '';
 
-    if(valorFormatado.includes("."))
+    do
     {
-      valorFormatado =  valorFormatado.replace(".","");
-      valorFormatado =  valorFormatado.replace("-","");
-      valorFormatado+="0";
+      if(valorFormatado.includes(".") || valorFormatado.includes("-"))
+      {
+        valorFormatado =  valorFormatado.replace(".","");
+        valorFormatado =  valorFormatado.replace("-","");
+      }
+      else
+      {
+        break;
+      }
+    }while (true);
+
+    if(!this.onlyNumbers(valorFormatado))
+    {
+      
+      do
+      {
+        if(valorFormatado.length==0)
+          break;
+        if(!this.onlyNumbers(valorFormatado))
+        {
+          valorFormatado =  valorFormatado.substring(0, valorFormatado.length-1);
+        }
+        else
+        {
+          break;
+        }
+      }while (true);
+      
+      this.dataForm.cpf= valorFormatado;
+      if(valorFormatado.length==0)
+        return;
     }
     
     valorFormatado = valorFormatado
@@ -91,14 +129,7 @@ export class AppComponent
         break;
       }
     }while (true);
-    if(valorFormatado.includes("."))
-    {
-      valorFormatado =  valorFormatado.replace(".","");
-      valorFormatado =  valorFormatado.replace(".","");
-      valorFormatado =  valorFormatado.replace(".","");
-      valorFormatado =  valorFormatado.replace("-","");
-      valorFormatado =  valorFormatado.replace("-","");
-    }
+
     value = valorFormatado;
 
     var i=0;
@@ -120,14 +151,47 @@ export class AppComponent
     return valorFormatado;
   }
 
+
+
+  public formatName()
+  {
+    const me = document.getElementById('NameText') as HTMLInputElement | null;
+
+    if(me==null)
+    {
+      return;
+    }
+
+    if(me.value.startsWith(" "))
+    {
+      me.value = me.value.substring(1);
+    }
+
+    if(me.value.endsWith("  "))
+    {
+      me.value = me.value.substring(0, me.value.length-1)
+    }
+
+  }
+
   public nameVerify():boolean
   {
     const me = document.getElementById('NameText') as HTMLInputElement | null;
-    var broke = false;
-
-    if(me?.value=="")
+    
+    if(me?.value.trim()=="" && me?.value.length==0)
     {
-      return true;
+      return false;
+    }
+
+    if(me?.value.trim()=="" && me?.value.length>0)
+    {
+      alert("Existe apenas espaços no nome!!!")
+      return false;
+    }
+
+    if(me?.value.endsWith(" "))
+    {
+      me.value = me.value.substring(0, me.value.length-1)
     }
 
     if(me==null)
@@ -147,12 +211,14 @@ export class AppComponent
     return false;
   }
 
-
   public  onlyLetters(str:string):boolean {
     str = str.trim().toLowerCase();
     return /^[a-zA-Z\s]+$/.test(str);
   }
 
+  public onlyNumbers(str:string):boolean {
+    return /^[0-9]+$/.test(str);
+  }
 
 }
 

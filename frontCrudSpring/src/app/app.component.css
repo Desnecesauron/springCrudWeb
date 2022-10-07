@@ -36,9 +36,8 @@
   box-shadow: 4px black;
   height: 80%;
   background-color: #cfe0e8;
-  
   display: flex;
-    align-items: center;
+  align-items: center;
 }
 
 .forms
@@ -47,14 +46,10 @@
   width: 100%;
 }
 
-
-
 #loginBtn
 {
   background-color: #667292;
 }
-
-
 
 .btnLogin
 {
@@ -75,14 +70,16 @@
   border-radius: 5px;
 }
 
-.button--pandora {
+.button--pandora
+{
 	background: #000;
 	font-weight: 700;
 	padding: 0;
 	border-radius: 5px;
 }
 
-.button--pandora span {
+.button--pandora span
+{
 	display: block;
 	background: #b7d7e8;
 	padding: 1.5rem 2rem;
@@ -92,37 +89,63 @@
 	transition:  transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
 }
 
-.button--pandora:hover span {
+.button--pandora:hover span,
+button#loginBtn:focus span
+{
 	transform: translate3d(-8px, -8px, 0);
   background: #87bdd8;
   transition: all 0.3s ease-in-out;
 }
 
 
-.textNome
-.textCpf{
-	position:relative;
-	margin-bottom:25px;
+.textNome,
+.textPassword,
+.textCpf
+{
+  text-align: left;
 }
+
 .textNome input, 
+.textPassword input, 
 .textCpf input{ 
   border:0;
   border-bottom:1px solid #555;  
   background:transparent;
-  width:20;
+  min-width: 212px;
+  width:20%;
   padding:8px 0 5px 0;
   font-size:16px;
   transition: all 0.3s ease-in-out;
   background-color: #b7d7e8;
-  margin: 10px;
-  border-radius: 20px;
+  border-radius: 8px;
   padding-left: 5px;
   /* color:#fff; */
 }
 
+.box
+{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
 .textNome input:hover,
 .textCpf input:hover,
+.textPassword input:focus,
+.textPassword input:hover,
 .textNome input:focus,
-.textCpf input:focus{
+.textCpf input:focus
+{
  background-color: #87bdd8;
+}
+
+.titleInput
+{
+  padding-top: 10px;
+}
+
+#CpfText
+{
+  padding-left: 5px;
 }
