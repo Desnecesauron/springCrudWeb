@@ -11,11 +11,24 @@ export class AppComponent
 {
   title = 'frontCrudSpring';
 
+  constructor()
+  {
+    document.body.style.setProperty('--cor-um',"#cfe0e8");
+    document.body.style.setProperty('--cor-btns',"#000");
+    document.body.style.setProperty('--cor-background-inputs',"#b7d7e8");
+    document.body.style.setProperty('--cor-inputs-active',"#87bdd8");
+  }
+
   public dataForm:{ nome:string, cpf:any} = {nome:"", cpf:""};
 
   public postLogin()
   {
     // console.log(this.dataForm)
+
+    if(this.dataForm.cpf=="" && this.dataForm.nome=="")
+    {
+      alert("Insira os dados!!")
+    }
 
     if(!(this.nameVerify()))
     {
@@ -33,9 +46,30 @@ export class AppComponent
       redirect: 'follow'
     };
     
-    fetch("https://crudclinics.herokuapp.com/listPersons")
+    fetch("https://crudclinics.herokuapp.com/listPersons/cpf/" + this.desformatAnyCpf(this.dataForm.cpf))
       .then(response => response.text())
-      .then(result => console.log("Resultado:"+result))
+      .then(result =>
+      {
+        var resultJson = JSON.parse(result);
+        console.log("Resultado:"+result)
+        console.log(resultJson.status)
+        if(resultJson.status=="404")
+        {
+          alert("Cadastro não encontrado!");
+          
+        }
+
+        if(resultJson.nome == this.dataForm.nome && resultJson.cpf == this.desformatAnyCpf(this.dataForm.cpf))
+        {
+          alert("Bem-vindo, " + this.dataForm.nome + "!");
+        }
+        else
+        {
+          alert("Cadastro não bate!!");
+          
+        }
+
+      })
       .catch(error => console.log('error', error));
 
     return;

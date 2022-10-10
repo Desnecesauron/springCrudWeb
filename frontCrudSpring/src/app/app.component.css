@@ -19,9 +19,9 @@
 {
   min-height: 50px;
   height: 5vh;
-  background-color: #cfe0e8;
+  background-color: var(--cor-um);
   display: flex;
-  justify-content:space-around;
+  justify-content:center;
   align-items: center;
 }
 
@@ -29,13 +29,13 @@
 {
   position: relative;
   top: calc(30px);
-  left: 10%;
-  width: 80%;
+  left: 30%;
+  width: 40%;
   min-height: 500px;
   border-radius: 10px;
   box-shadow: 4px black;
   height: 80%;
-  background-color: #cfe0e8;
+  background-color: var(--cor-um);
   display: flex;
   align-items: center;
 }
@@ -64,7 +64,7 @@
   font-size: inherit;
   position: relative;
   display: inline-block;
-  background: #000;
+  background: var(--cor-btns);
   font-weight: 700;
   padding: 0;
   border-radius: 5px;
@@ -72,7 +72,7 @@
 
 .button--pandora
 {
-	background: #000;
+	background: var(--cor-btns);
 	font-weight: 700;
 	padding: 0;
 	border-radius: 5px;
@@ -81,9 +81,9 @@
 .button--pandora span
 {
 	display: block;
-	background: #b7d7e8;
+	background: var(--cor-background-inputs);
 	padding: 1.5rem 2rem;
-	border: 1px solid #000;
+	border: 1px solid var(--cor-btns);
 	border-radius: 5px;
 	transform: translate3d(-4px, -4px, 0);
 	transition:  transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
@@ -93,7 +93,7 @@
 button#loginBtn:focus span
 {
 	transform: translate3d(-8px, -8px, 0);
-  background: #87bdd8;
+  background: var(--cor-inputs-active);
   transition: all 0.3s ease-in-out;
 }
 
@@ -116,10 +116,9 @@ button#loginBtn:focus span
   padding:8px 0 5px 0;
   font-size:16px;
   transition: all 0.3s ease-in-out;
-  background-color: #b7d7e8;
+  background-color: var(--cor-background-inputs);
   border-radius: 8px;
   padding-left: 5px;
-  /* color:#fff; */
 }
 
 .box
@@ -137,7 +136,7 @@ button#loginBtn:focus span
 .textNome input:focus,
 .textCpf input:focus
 {
- background-color: #87bdd8;
+  background-color: var(--cor-inputs-active);
 }
 
 .titleInput
