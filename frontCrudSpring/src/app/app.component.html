@@ -19,12 +19,7 @@
 
       <div class="textCpf">
         <div class="titleInput">CPF</div>
-        <input type="text" id="CpfText" required="" placeholder="CPF" [(ngModel)]="dataForm.cpf" (keyup)="formatCpf();" (keydown)="desformatCpf();" >
-      </div>
-
-      <div class="textPassword">
-        <div class="titleInput">Senha</div>
-        <input type="password" id="PasswordText" required="" placeholder="Senha" [(ngModel)]="dataForm.password" >
+        <input type="text" id="CpfText" required="" placeholder="CPF" [(ngModel)]="dataForm.cpf" (keyup)="formatCpf();" (keydown)="desformatCpf();" (focusout) = "formatCpf();">
       </div>
     </div>
     

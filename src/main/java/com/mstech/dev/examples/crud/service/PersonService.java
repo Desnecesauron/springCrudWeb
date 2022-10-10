@@ -3,7 +3,6 @@ package com.mstech.dev.examples.crud.service;
 import com.mstech.dev.examples.crud.entities.Person;
 import com.mstech.dev.examples.crud.exceptions.DataNotFoundException;
 import com.mstech.dev.examples.crud.exceptions.DataNotPossibleException;
-import com.mstech.dev.examples.crud.exceptions.StandardError;
 import com.mstech.dev.examples.crud.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +26,13 @@ public class PersonService
         Optional<Person> obj = personRepository.findById(id);
         return obj.orElseThrow(() -> new DataNotFoundException(id));
     }
+
+    public Person findByCPF(Long CPF)
+    {
+        Person obj = personRepository.findByCpf(CPF);
+        return obj;
+    }
+
  /*   public Person findPersonCPF(Long cpf)
     {
         Optional<Person> obj = personRepository.find(id);

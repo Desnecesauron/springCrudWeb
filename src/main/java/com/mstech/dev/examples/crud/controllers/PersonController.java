@@ -1,6 +1,7 @@
 package com.mstech.dev.examples.crud.controllers;
 
 import com.mstech.dev.examples.crud.entities.Person;
+import com.mstech.dev.examples.crud.exceptions.DataNotFoundException;
 import com.mstech.dev.examples.crud.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,17 @@ public class PersonController {
     public ResponseEntity<Person> findPerson(@PathVariable Long id)
     {
         Person person= personService.findPerson(id);
-        return ResponseEntity.ok().body( person);
+        return ResponseEntity.ok().body(person);
+    }
+    
+    @GetMapping(value = "/cpf/{cpfNumber}")
+    public ResponseEntity<Person> findPersonCPF(@PathVariable Long cpfNumber)
+    {
+        Person person= personService.findByCPF(cpfNumber);
+        if(person!=null)
+            return ResponseEntity.ok().body(person);
+        throw new DataNotFoundException(cpfNumber);
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     public Person returnPerson(Long id)

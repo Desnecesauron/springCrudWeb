@@ -11,17 +11,22 @@ export class AppComponent
 {
   title = 'frontCrudSpring';
 
-  public dataForm:{ nome:string, cpf:any, password:string} = {nome:"", cpf:"", password:""};
+  public dataForm:{ nome:string, cpf:any} = {nome:"", cpf:""};
 
   public postLogin()
   {
-    console.log(this.dataForm)
+    // console.log(this.dataForm)
 
     if(!(this.nameVerify()))
     {
       return;
     }
 
+    if(!(this.TestaCPF()))
+    {
+      alert("Mó cota fazendo isso pra tu colocar CPF inválido :(")
+      return;
+    }
 
     var requestOptions = {
       method: 'GET',
@@ -30,9 +35,8 @@ export class AppComponent
     
     fetch("https://crudclinics.herokuapp.com/listPersons")
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => console.log("Resultado:"+result))
       .catch(error => console.log('error', error));
-
 
     return;
   }
@@ -117,20 +121,7 @@ export class AppComponent
 
     let valorFormatado = value + '';
 
-    do
-    {
-      if(valorFormatado.includes(".") || valorFormatado.includes("-"))
-      {
-        valorFormatado =  valorFormatado.replace(".","");
-        valorFormatado =  valorFormatado.replace("-","");
-      }
-      else
-      {
-        break;
-      }
-    }while (true);
-
-    value = valorFormatado;
+    value = this.desformatAnyCpf(valorFormatado);
 
     var i=0;
     while (value[i])
@@ -149,6 +140,48 @@ export class AppComponent
     
     this.dataForm.cpf=valorFormatado;  
     return valorFormatado;
+  }
+
+  public desformatAnyCpf(strCPF:string):string
+  {
+    do
+    {
+      if(strCPF.includes(".") || strCPF.includes("-"))
+      {
+        strCPF =  strCPF.replace(".","");
+        strCPF =  strCPF.replace("-","");
+      }
+      else
+      {
+        break;
+      }
+    }while (true);
+
+    return strCPF;
+  }
+
+
+  public TestaCPF():boolean
+  {
+    var strCPF = this.desformatAnyCpf(this.dataForm.cpf);
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (strCPF == "00000000000") return false;
+
+    for (var i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+    Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+    return true;
   }
 
 

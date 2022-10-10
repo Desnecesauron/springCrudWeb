@@ -7,6 +7,11 @@ public class DataNotFoundException extends RuntimeException
         super("Resource not found. Id " + id);
     }
 
+    public DataNotFoundException(Long cpf)
+    {
+        super("Resource not found. CPF " + cpf);
+    }
+
     public DataNotFoundException()
     {
         super("Page not found, do you have wrote the link correct?");
