@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { __values } from 'tslib';
 
 @Component({
@@ -7,19 +8,54 @@ import { __values } from 'tslib';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent
+export class AppComponent implements OnInit
 {
-  title = 'frontCrudSpring';
+  titlePage = 'Clinic Plus';
 
-  constructor()
+  constructor(private title:Title)
   {
     document.body.style.setProperty('--cor-um',"#cfe0e8");
     document.body.style.setProperty('--cor-btns',"#000");
     document.body.style.setProperty('--cor-background-inputs',"#b7d7e8");
     document.body.style.setProperty('--cor-inputs-active',"#87bdd8");
+    
+    document.body.style.setProperty('--visible-login',"none");
+    document.body.style.setProperty('--visible-register',"none");
+    document.body.style.setProperty('--visible-modal',"none");
+    // document.body.style.setProperty('--visible-login',"block");
+  }
+
+  ngOnInit()
+  {
+    this.title.setTitle(this.titlePage);
   }
 
   public dataForm:{ nome:string, cpf:any} = {nome:"", cpf:""};
+
+
+  public openLogin()
+  {
+    document.body.style.setProperty('--visible-login',"block");
+    document.body.style.setProperty('--visible-modal',"block");
+  }
+
+  public openRegister()
+  {
+    document.body.style.setProperty('--visible-register',"block");
+    document.body.style.setProperty('--visible-modal',"block");
+  }
+
+  public closeRegister()
+  {
+    document.body.style.setProperty('--visible-register',"none");
+    document.body.style.setProperty('--visible-modal',"none");
+  }
+  
+  public closeLogin()
+  {
+    document.body.style.setProperty('--visible-login',"none");
+    document.body.style.setProperty('--visible-modal',"none");
+  }
 
   public postLogin()
   {
@@ -28,6 +64,7 @@ export class AppComponent
     if(this.dataForm.cpf=="" && this.dataForm.nome=="")
     {
       alert("Insira os dados!!")
+      return;
     }
 
     if(!(this.nameVerify()))
@@ -56,6 +93,7 @@ export class AppComponent
         if(resultJson.status=="404")
         {
           alert("Cadastro não encontrado!");
+          return;
           
         }
 
@@ -66,6 +104,7 @@ export class AppComponent
         else
         {
           alert("Cadastro não bate!!");
+          return;
           
         }
 

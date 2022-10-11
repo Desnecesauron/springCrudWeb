@@ -1,18 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=greek-ext');
+/*https://fontawesome.com/docs/apis/javascript/import-icons  */
+@font-face {
+  font-family: 'Simple Brush Script';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Simple Brush Script'), url('https://fonts.cdnfonts.com/s/37106/SimpleBrushScript-lyqZ.woff') format('woff');
+}
 
 .main
 {
-
   width: 100%;
   height: 100%;
 }
 
-.header > strong
+.header
 {
-  font-size: calc(20px + 1.5vw);
+  font-size: calc(20px + 2.5vw);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  font-family: 'Simple Brush Script', sans-serif;
 }
 
 .header
@@ -27,38 +34,42 @@
 
 .loginPanel
 {
-  position: relative;
-  top: calc(30px);
-  left: 30%;
-  width: 40%;
-  min-height: 500px;
+  top: 15vh;
+  width: 40vw;
+  min-height: 350px;
+  min-width: 250px;
   border-radius: 10px;
-  box-shadow: 4px black;
-  height: 80%;
+  height: 60%;
   background-color: var(--cor-um);
   display: flex;
   align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .forms
 {
   text-align: center;
   width: 100%;
+  margin-top: 3vh;
 }
 
 #loginBtn
 {
-  background-color: #667292;
+  background-color: var(--cor-um);
+  min-width: 212px;
+  width:20%;
 }
 
 .btnLogin
 {
-  margin: 2vh;
+  margin-bottom: 2vh;
   pointer-events: auto;
   cursor: pointer;
   background: #e7e7e7;
   border: none;
-  padding: 1.5rem 3rem;
+  padding: 1rem 1rem;
   /*margin: 0;*/
   font-family: inherit;
   font-size: inherit;
@@ -99,14 +110,13 @@ button#loginBtn:focus span
 
 
 .textNome,
-.textPassword,
 .textCpf
 {
   text-align: left;
+  padding-bottom: 16px;
 }
 
 .textNome input, 
-.textPassword input, 
 .textCpf input{ 
   border:0;
   border-bottom:1px solid #555;  
@@ -131,8 +141,6 @@ button#loginBtn:focus span
 
 .textNome input:hover,
 .textCpf input:hover,
-.textPassword input:focus,
-.textPassword input:hover,
 .textNome input:focus,
 .textCpf input:focus
 {
@@ -141,10 +149,120 @@ button#loginBtn:focus span
 
 .titleInput
 {
-  padding-top: 10px;
+  padding-bottom: 8px;
 }
 
 #CpfText
 {
   padding-left: 5px;
+}
+
+.cadastrar>a:link, .cadastrar>a:visited
+{
+  /* color: var(--cor-background-inputs); */
+  text-decoration: none;
+}
+
+.cadastrar
+{
+  transition: all 0.3s;
+  font-size: smaller;
+  font-weight: bold;
+}
+
+.cadastrar:hover, .cadastrar:active
+{
+  cursor: pointer;
+  color: blue;
+}
+
+.bg
+{
+  z-index: -2;
+  position: absolute;
+  
+}
+
+.bg.img
+{
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/imgs/imgBg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(5px);
+}
+
+.title
+{
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  font-size: 4.9vw;
+  padding-bottom: 40px;
+  font-family: 'Simple Brush Script', sans-serif;
+}
+
+.modal
+{
+  width: 100%;
+  height: 100%;
+  display: var(--visible-modal);
+  /* position: absolute; */
+  position: absolute;
+  z-index: 2;
+}
+
+.modal>.login
+{
+  display: var(--visible-login);
+}
+
+.modal>.register
+{
+  display: var(--visible-register);
+}
+
+
+
+@media (min-width: 760px)
+{
+  .loginPanel
+  {
+    border-radius: inherit;
+    width: 35%;
+    min-height: 100vh;
+    min-width: 250px;
+    height: 100%;
+    background-color: var(--cor-um);
+    display: flex;
+    align-items: center;
+    left: 50%;
+    justify-content: center;
+    align-content: flex-end;
+    top: 0;
+    margin-left: auto;
+    right: 0;
+    position: inherit;
+    transform: inherit;
+  }
+
+  .bg.img
+  {
+    filter: blur(1px);
+  }
+
+  .title
+  {
+    display: block;
+    text-align: center;
+    width: 65%;
+  }
+
+  .header
+  {
+    display: none;
+  }
+  
 }
