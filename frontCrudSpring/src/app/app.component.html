@@ -1,20 +1,23 @@
-<div class="bg img"></div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet" />
 
+<div class="bg img"></div>
 
 <div class="modal">
 
   <div class="login">
     <div class="loginPanel">
       <div class="forms">
-  
         <div class="box">
 
-
-          <div class="btnLogin button--pandora">
-            <button id="loginBtn" (click)="closeLogin();">
-              <span>Xis</span>
-            </button>
+          <div class="title">
+            <div>Clinic Plus</div>
           </div>
+
+          <button class="linkBackPage" (click)="closeLogin();">
+            <i class="fa fa-angle-left"></i>
+          </button>
 
 
           <div class="textNome">
@@ -28,14 +31,13 @@
           </div>
         </div>
         
-        <div class="btnLogin button--pandora">
-          <button id="loginBtn" (click)="postLogin();">
-            <span>Login</span>
-          </button>
-        </div>
+        <button type="button" class="slide" (click)="postLogin();">
+          <div>Login</div>
+          <i class="icon-login"></i>
+        </button>
   
         <div class="cadastrar">
-          <a (click)="closeLogin(); openRegister();">Ainda não tem cadastro? Cadastre-se na Clinic plus!</a>
+          <a (click)="closeLogin(); openRegister();">Ainda não tem cadastro? Cadastre-se na Clinic Plus!</a>
         </div>
   
       </div>
@@ -43,40 +45,65 @@
   </div>
 
   <div class="register">
-
-
     <div class="loginPanel">
       <div class="forms">
-  
         <div class="box">
 
-          <div class="btnLogin button--pandora">
-            <button id="loginBtn" (click)="closeRegister();">
-              <span>Xis</span>
-            </button>
+          <div class="title">
+            <div>Clinic Plus</div>
           </div>
+
+          <button class="linkBackPage" (click)="closeRegister();">
+            <i class="fa fa-angle-left"></i>
+          </button>
 
           <div class="textNome">
             <div class="titleInput">Nome</div>
             <input type="text" id="NameText" required="" placeholder="Nome" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();" (keyup)="formatName();">
           </div>
-  
+
           <div class="textCpf">
             <div class="titleInput">CPF</div>
             <input type="text" id="CpfText" required="" placeholder="CPF" [(ngModel)]="dataForm.cpf" (keyup)="formatCpf();" (keydown)="desformatCpf();" (focusout) = "formatCpf();">
           </div>
+
+          <div class="textEndereco">
+            <div class="titleInput">Endereço</div>
+            <input type="text" id="NameText" required="" placeholder="Endereço" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();" (keyup)="formatName();">
+          </div>
+
+          <div class="textCep">
+            <div class="titleInput">CEP</div>
+            <input type="text" id="NameText" required="" placeholder="CEP" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();" (keyup)="formatName();">
+          </div>
+
+          <div class="textCidade">
+            <div class="titleInput">Cidade</div>
+            <input type="text" id="NameText" required="" placeholder="Cidade" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();" (keyup)="formatName();">
+          </div>
+          
+          <div class="checkCRM">
+            <div class="titleInput">Selecione:</div>
+            <input type="radio" name="pacientMedic" id="medic">
+            <label for="medic">Médico</label><br>
+            <input type="radio" name="pacientMedic" id="patient">
+            <label for="patient">Paciente</label>
+          </div>
+
+          <div class="textCRM">
+            <div class="titleInput">CRM</div>
+            <input type="text" id="NameText" [disabled]="!crmChecked" required="" placeholder="CRM" [(ngModel)]="dataForm.nome" (focusout) = "nameVerify();" (keyup)="formatName();">
+          </div>
         </div>
-        
-        <div class="btnLogin button--pandora">
-          <button id="loginBtn" (click)="postLogin();">
-            <span>Confirmar cadastro</span>
-          </button>
-        </div>
+
+
+        <button type="button" class="slide" (click)="postRegister();">
+          <div>Cadastre-se</div>
+          <i class="icon-note"></i>
+        </button>
   
       </div>
     </div>
-
-
   </div>
 
 </div>
@@ -87,29 +114,25 @@
     Clinic Plus
   </header>
 
-  <div class="loginPanel">
+  <div class="loginPanel" id="homePanel">
     <div class="forms">
       <div class="box">
-
         <div class="title">
           <div>Clinic Plus</div>
         </div>
 
-        <div class="btnLogin button--pandora">
-          <button id="loginBtn" (click)="openLogin();">
-            <span>Login</span>
-          </button>
-        </div>
-
-        <div class="btnLogin button--pandora">
-          <button id="loginBtn" (click)="openRegister();">
-            <span>Cadastre-se</span>
-          </button>
-        </div>
-
+        <button type="button" class="slide" (click)="openLogin();">
+          <div>Login</div>
+          <i class="icon-login"></i>
+        </button>
+        
+        <button type="button" class="slide" (click)="openRegister();">
+          <div>Cadastre-se</div>
+          <i class="icon-note"></i>
+        </button>
+      </div>
     </div>
   </div>
-
   <footer class="footer">
 
   </footer>

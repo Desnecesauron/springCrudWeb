@@ -19,7 +19,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  font-family: 'Simple Brush Script', sans-serif;
+  font-family: "Roboto Mono", monospace;
 }
 
 .header
@@ -34,11 +34,12 @@
 
 .loginPanel
 {
+  border: var(--cor-background-inputs) 3px solid;
   top: 15vh;
   width: 40vw;
   min-height: 350px;
   min-width: 250px;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 60%;
   background-color: var(--cor-um);
   display: flex;
@@ -46,6 +47,11 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+}
+
+#homePanel
+{
+  display: var(--visible-homePage);
 }
 
 .forms
@@ -62,62 +68,55 @@
   width:20%;
 }
 
-.btnLogin
-{
+.slide {
   margin-bottom: 2vh;
-  pointer-events: auto;
+  background: var(--cor-background-inputs);
+  min-width: 212px;
+  width: 20%;
+  font-family: "Roboto Mono", monospace;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 30px 13px;
+  outline: 0;
+  border: 1px solid black;
   cursor: pointer;
-  background: #e7e7e7;
-  border: none;
-  padding: 1rem 1rem;
-  /*margin: 0;*/
-  font-family: inherit;
-  font-size: inherit;
   position: relative;
-  display: inline-block;
-  background: var(--cor-btns);
-  font-weight: 700;
-  padding: 0;
-  border-radius: 5px;
 }
 
-.button--pandora
-{
-	background: var(--cor-btns);
-	font-weight: 700;
-	padding: 0;
-	border-radius: 5px;
+.slide i {
+  opacity: 0;
+  font-size: 13px;
+  transition: 0.2s;
+  position: absolute;
+  right: 10px;
+  top: 21px;
+  transition: transform 1;
 }
 
-.button--pandora span
-{
-	display: block;
-	background: var(--cor-background-inputs);
-	padding: 1.5rem 2rem;
-	border: 1px solid var(--cor-btns);
-	border-radius: 5px;
-	transform: translate3d(-4px, -4px, 0);
-	transition:  transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+.slide div {
+  transition: transform 0.8s;
 }
 
-.button--pandora:hover span,
-button#loginBtn:focus span
-{
-	transform: translate3d(-8px, -8px, 0);
-  background: var(--cor-inputs-active);
-  transition: all 0.3s ease-in-out;
+.slide:hover div,
+.slide:focus div {
+  transform: translateX(-6px);
 }
 
+.slide:hover i 
+.slide:focus i {
+  opacity: 1;
+  transform: translateX(-6px);
+}
 
-.textNome,
-.textCpf
+.box > div:not(:nth-child(1))
 {
   text-align: left;
   padding-bottom: 16px;
 }
 
-.textNome input, 
-.textCpf input{ 
+.box div input{ 
   border:0;
   border-bottom:1px solid #555;  
   background:transparent;
@@ -139,10 +138,8 @@ button#loginBtn:focus span
   align-items: center;
 }
 
-.textNome input:hover,
-.textCpf input:hover,
-.textNome input:focus,
-.textCpf input:focus
+.box div input:hover,
+.box div input:focus
 {
   background-color: var(--cor-inputs-active);
 }
@@ -168,12 +165,13 @@ button#loginBtn:focus span
   transition: all 0.3s;
   font-size: smaller;
   font-weight: bold;
+  margin-bottom: 2vh;
 }
 
 .cadastrar:hover, .cadastrar:active
 {
   cursor: pointer;
-  color: blue;
+  color: var(--cor-inputs-active);
 }
 
 .bg
@@ -201,7 +199,7 @@ button#loginBtn:focus span
   align-items: center;
   font-size: 4.9vw;
   padding-bottom: 40px;
-  font-family: 'Simple Brush Script', sans-serif;
+  font-family: "Roboto Mono", monospace;
 }
 
 .modal
@@ -224,15 +222,50 @@ button#loginBtn:focus span
   display: var(--visible-register);
 }
 
+input,
+button
+{
+  color: var(--cor-btns);
+}
 
+input:disabled,
+button:disabled
+{
+  color: var(--cor-btns);
+  opacity: 0.5;
+}
+
+.linkBackPage
+{
+  color: var(--cor-background-inputs);
+  display: block;
+  margin-right: auto;
+  font-size: 45px;
+  cursor: pointer;
+  transition: 0.4s all;
+  background-color: transparent;
+  margin-left: 10px;
+}
+
+button:nth-child(3)
+{
+  color: var(--cor-background-inputs);
+  background: var(--cor-btns);
+}
+
+.linkBackPage:hover,
+.linkBackPage:focus
+{
+  color: var(--cor-inputs-active);
+}
 
 @media (min-width: 760px)
 {
   .loginPanel
   {
-    border-radius: inherit;
+    /* border-radius: inherit; */
     width: 35%;
-    min-height: 100vh;
+    min-height: calc(100vh - 6px);
     min-width: 250px;
     height: 100%;
     background-color: var(--cor-um);

@@ -14,15 +14,16 @@ export class AppComponent implements OnInit
 
   constructor(private title:Title)
   {
-    document.body.style.setProperty('--cor-um',"#cfe0e8");
-    document.body.style.setProperty('--cor-btns',"#000");
-    document.body.style.setProperty('--cor-background-inputs',"#b7d7e8");
-    document.body.style.setProperty('--cor-inputs-active',"#87bdd8");
-    
+    document.body.style.setProperty('--cor-um',"#E0E0E0");
+    document.body.style.setProperty('--cor-background-inputs',"#294852");
+    document.body.style.setProperty('--cor-inputs-active',"#2c4c57d1");
+    document.body.style.setProperty('--cor-inputs-disabled',"#5c4c57d1");
+    document.body.style.setProperty('--cor-btns',"#E2E2E2");
+
     document.body.style.setProperty('--visible-login',"none");
     document.body.style.setProperty('--visible-register',"none");
     document.body.style.setProperty('--visible-modal',"none");
-    // document.body.style.setProperty('--visible-login',"block");
+    document.body.style.setProperty('--visible-homePage',"flex");
   }
 
   ngOnInit()
@@ -30,31 +31,36 @@ export class AppComponent implements OnInit
     this.title.setTitle(this.titlePage);
   }
 
-  public dataForm:{ nome:string, cpf:any} = {nome:"", cpf:""};
+  public crmChecked:boolean = false;
+  public dataForm:{ nome:string, cpf:any, endereco:string, cep:Number, cidade:string, medico: boolean, crm:any} = {nome:"", cpf:"", endereco:"", cep:0, cidade:"", medico:false, crm: null};
 
 
   public openLogin()
   {
     document.body.style.setProperty('--visible-login',"block");
     document.body.style.setProperty('--visible-modal',"block");
+    document.body.style.setProperty('--visible-homePage',"none");
   }
 
   public openRegister()
   {
     document.body.style.setProperty('--visible-register',"block");
     document.body.style.setProperty('--visible-modal',"block");
+    document.body.style.setProperty('--visible-homePage',"none");
   }
 
   public closeRegister()
   {
     document.body.style.setProperty('--visible-register',"none");
     document.body.style.setProperty('--visible-modal',"none");
+    document.body.style.setProperty('--visible-homePage',"flex");
   }
   
   public closeLogin()
   {
     document.body.style.setProperty('--visible-login',"none");
     document.body.style.setProperty('--visible-modal',"none");
+    document.body.style.setProperty('--visible-homePage',"flex");
   }
 
   public postLogin()
@@ -112,6 +118,11 @@ export class AppComponent implements OnInit
       .catch(error => console.log('error', error));
 
     return;
+  }
+
+  public postRegister()
+  {
+
   }
 
   public formatCpf()
