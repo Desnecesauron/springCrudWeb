@@ -1,15 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
 * {
-  padding:0;
-  margin:0;
-  vertical-align:baseline;
-  list-style:none;
-  border:0;
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  list-style: none;
+  border: 0;
 }
 
-body
-{
-  font-family: 'Noto Sans', sans-serif;
+body {
+  font-family: "Noto Sans", sans-serif;
 }
 
+html {
+  background-color: #e2e2e2;
+}

@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=greek-ext');
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=greek-ext");
 /*https://fontawesome.com/docs/apis/javascript/import-icons  */
 @font-face {
-  font-family: 'Simple Brush Script';
+  font-family: "Simple Brush Script";
   font-style: normal;
   font-weight: 400;
-  src: local('Simple Brush Script'), url('https://fonts.cdnfonts.com/s/37106/SimpleBrushScript-lyqZ.woff') format('woff');
+  src: local("Simple Brush Script"),
+    url("https://fonts.cdnfonts.com/s/37106/SimpleBrushScript-lyqZ.woff")
+      format("woff");
 }
 
-.main
-{
+.main {
   width: 100%;
   height: 100%;
 }
 
-.header
-{
+.header {
   font-size: calc(20px + 2.5vw);
   text-overflow: ellipsis;
   overflow: hidden;
@@ -22,18 +22,16 @@
   font-family: "Roboto Mono", monospace;
 }
 
-.header
-{
+.header {
   min-height: 50px;
   height: 5vh;
   background-color: var(--cor-um);
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
-.loginPanel
-{
+.loginPanel {
   border: var(--cor-background-inputs) 3px solid;
   top: 15vh;
   width: 40vw;
@@ -49,23 +47,20 @@
   transform: translateX(-50%);
 }
 
-#homePanel
-{
+#homePanel {
   display: var(--visible-homePage);
 }
 
-.forms
-{
+.forms {
   text-align: center;
   width: 100%;
   margin-top: 3vh;
 }
 
-#loginBtn
-{
+#loginBtn {
   background-color: var(--cor-um);
   min-width: 212px;
-  width:20%;
+  width: 20%;
 }
 
 .slide {
@@ -104,34 +99,32 @@
   transform: translateX(-6px);
 }
 
-.slide:hover i 
+.slide:hover i,
 .slide:focus i {
   opacity: 1;
   transform: translateX(-6px);
 }
 
-.box > div:not(:nth-child(1))
-{
+.box > div:not(:nth-child(1)) {
   text-align: left;
   padding-bottom: 16px;
 }
 
-.box div input{ 
-  border:0;
-  border-bottom:1px solid #555;  
-  background:transparent;
+.box div input {
+  border: 0;
+  border-bottom: 1px solid #555;
+  background: transparent;
   min-width: 212px;
-  width:20%;
-  padding:8px 0 5px 0;
-  font-size:16px;
+  width: 20%;
+  padding: 8px 0 5px 0;
+  font-size: 16px;
   transition: all 0.3s ease-in-out;
   background-color: var(--cor-background-inputs);
   border-radius: 8px;
   padding-left: 5px;
 }
 
-.box
-{
+.box {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -139,50 +132,24 @@
 }
 
 .box div input:hover,
-.box div input:focus
-{
+.box div input:focus {
   background-color: var(--cor-inputs-active);
 }
 
-.titleInput
-{
+.titleInput {
   padding-bottom: 8px;
 }
 
-#CpfText
-{
+#CpfText {
   padding-left: 5px;
 }
 
-.cadastrar>a:link, .cadastrar>a:visited
-{
-  /* color: var(--cor-background-inputs); */
-  text-decoration: none;
-}
-
-.cadastrar
-{
-  transition: all 0.3s;
-  font-size: smaller;
-  font-weight: bold;
-  margin-bottom: 2vh;
-}
-
-.cadastrar:hover, .cadastrar:active
-{
-  cursor: pointer;
-  color: var(--cor-inputs-active);
-}
-
-.bg
-{
+.bg {
   z-index: -2;
   position: absolute;
-  
 }
 
-.bg.img
-{
+.bg.img {
   width: 100%;
   height: 100%;
   background-image: url(../assets/imgs/imgBg.jpg);
@@ -191,8 +158,7 @@
   filter: blur(5px);
 }
 
-.title
-{
+.title {
   display: none;
   flex-direction: column;
   width: 100%;
@@ -202,8 +168,7 @@
   font-family: "Roboto Mono", monospace;
 }
 
-.modal
-{
+.modal {
   width: 100%;
   height: 100%;
   display: var(--visible-modal);
@@ -212,31 +177,43 @@
   z-index: 2;
 }
 
-.modal>.login
-{
+.modal > .login {
   display: var(--visible-login);
 }
 
-.modal>.register
-{
+.modal > .register {
   display: var(--visible-register);
 }
 
 input,
-button
-{
+button {
   color: var(--cor-btns);
 }
 
 input:disabled,
-button:disabled
-{
+button:disabled {
   color: var(--cor-btns);
   opacity: 0.5;
 }
 
-.linkBackPage
-{
+button#register {
+  color: inherit;
+  background-color: transparent;
+  transition: all 0.3s;
+  font-size: smaller;
+  font-weight: bold;
+  margin-bottom: 2vh;
+}
+
+#register:hover,
+#register:active,
+#register:focus {
+  color: var(--cor-btns);
+  cursor: pointer;
+  color: var(--cor-inputs-active);
+}
+
+.linkBackPage {
   color: var(--cor-background-inputs);
   display: block;
   margin-right: auto;
@@ -244,25 +221,21 @@ button:disabled
   cursor: pointer;
   transition: 0.4s all;
   background-color: transparent;
-  margin-left: 10px;
+  margin-left: 3vw;
 }
 
-button:nth-child(3)
-{
+button:nth-child(3) {
   color: var(--cor-background-inputs);
   background: var(--cor-btns);
 }
 
 .linkBackPage:hover,
-.linkBackPage:focus
-{
+.linkBackPage:focus {
   color: var(--cor-inputs-active);
 }
 
-@media (min-width: 760px)
-{
-  .loginPanel
-  {
+@media (min-width: 760px) {
+  .loginPanel {
     /* border-radius: inherit; */
     width: 35%;
     min-height: calc(100vh - 6px);
@@ -281,21 +254,94 @@ button:nth-child(3)
     transform: inherit;
   }
 
-  .bg.img
-  {
+  .bg.img {
     filter: blur(1px);
   }
 
-  .title
-  {
+  .title {
     display: block;
     text-align: center;
     width: 65%;
   }
 
-  .header
-  {
+  .header {
     display: none;
   }
-  
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 50.2px;
+  }
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 0px !important;
+  min-width: 0px !important;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  /* height: 1.5vw; */
+  width: 20px;
+  /* width: 1.5vw; */
+  background-color: #eee;
+  border-radius: 50%;
+  margin-top: 7px;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 6px;
+  left: 6px;
+  /* top: 0.5vw; */
+  /* left: 0.5vw; */
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }
