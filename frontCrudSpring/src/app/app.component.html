@@ -37,12 +37,13 @@
             <div class="titleInput">Nome</div>
             <input
               type="text"
-              id="NameText"
+              id="NameTextReg"
               required=""
               placeholder="Nome"
               [(ngModel)]="dataForm.nome"
-              (focusout)="nameVerify()"
-              (keyup)="formatName()"
+              (keyup)="setMaskOnlyLetters(dataForm.nome)"
+              (paste)="setMaskOnlyLetters(dataForm.nome)"
+              (drop)="setMaskOnlyLetters(dataForm.nome)"
             />
           </div>
 
@@ -55,6 +56,8 @@
               placeholder="CPF"
               [(ngModel)]="dataForm.cpf"
               (keyup)="setMaskCPF()"
+              (paste)="setMaskCPF()"
+              maxlength="14"
             />
           </div>
         </div>
@@ -97,8 +100,8 @@
               required=""
               placeholder="Nome"
               [(ngModel)]="dataForm.nome"
-              (focusout)="nameVerify()"
-              (keyup)="formatName()"
+              (keyup)="setMaskOnlyLetters(dataForm.nome)"
+              (paste)="setMaskOnlyLetters(dataForm.nome)"
             />
           </div>
 
@@ -111,6 +114,7 @@
               placeholder="CPF"
               [(ngModel)]="dataForm.cpf"
               (keyup)="setMaskCPF()"
+              (paste)="setMaskCPF()"
               maxlength="14"
             />
           </div>
@@ -123,8 +127,12 @@
               required=""
               placeholder="Endereço"
               [(ngModel)]="dataForm.endereco"
-              (focusout)="nameVerify()"
-              (keyup)="formatName()"
+              (keyup)="
+                dataForm.endereco = removeSpacesInInitial(dataForm.endereco)
+              "
+              (paste)="
+                dataForm.endereco = removeSpacesInInitial(dataForm.endereco)
+              "
             />
           </div>
 
@@ -137,6 +145,7 @@
               placeholder="CEP"
               [(ngModel)]="dataForm.cep"
               (keyup)="setMaskCEP()"
+              (paste)="setMaskCEP()"
               maxlength="9"
             />
           </div>
@@ -149,7 +158,8 @@
               required=""
               placeholder="Cidade"
               [(ngModel)]="dataForm.cidade"
-              (keyup)="setMaskOnlyLetters('CityText')"
+              (keyup)="setMaskOnlyLetters(dataForm.cidade)"
+              (paste)="setMaskOnlyLetters(dataForm.cidade)"
             />
           </div>
 
@@ -190,6 +200,7 @@
               placeholder="CRM"
               [(ngModel)]="dataForm.crm"
               (keyup)="setMaskCRM()"
+              (paste)="setMaskCRM()"
             />
           </div>
         </div>
