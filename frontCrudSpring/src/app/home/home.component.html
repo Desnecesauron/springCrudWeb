@@ -157,6 +157,7 @@
               id="CityText"
               required=""
               placeholder="Cidade"
+              (paste)="utilService.blockPaste($event)"
               [(ngModel)]="dataForm.cidade"
               (keyup)="setMaskOnlyLetters(dataForm.cidade)"
               (paste)="setMaskOnlyLetters(dataForm.cidade)"
@@ -238,5 +239,3 @@
   </div>
   <footer class="footer"></footer>
 </div>
-
-<router-outlet></router-outlet>
