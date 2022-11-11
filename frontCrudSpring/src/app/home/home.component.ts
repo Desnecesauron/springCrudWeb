@@ -32,12 +32,13 @@ export class HomeComponent implements OnInit {
 
   varColors() {
     // document.body.style.setProperty('--cor-um', '#E0E0E0');
-    document.body.style.setProperty('--cor-um', '#fafafa');
+    document.body.style.setProperty('--cor-um', '#f4f9f7');
+    document.body.style.setProperty('--cor-texts', '#343a40');
     // document.body.style.setProperty('--cor-background-inputs', '#294852');
-    document.body.style.setProperty('--cor-background-inputs', '#0ea5e9');
+    document.body.style.setProperty('--cor-background-inputs', '#80b09e');
     document.body.style.setProperty('--cor-inputs-active', '#2c4c57d1');
     document.body.style.setProperty('--cor-inputs-disabled', '#5c4c57d1');
-    document.body.style.setProperty('--cor-btns', '#E2E2E2');
+    document.body.style.setProperty('--cor-btns', '#FFF');
 
     document.body.style.setProperty('--visible-login', 'none');
     document.body.style.setProperty('--visible-register', 'none');
