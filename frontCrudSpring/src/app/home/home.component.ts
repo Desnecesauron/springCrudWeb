@@ -1,6 +1,7 @@
 import { createMayBeForwardRefExpression } from '@angular/compiler';
 import { Component, createComponent, OnInit } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { __values } from 'tslib';
 import { UtilService } from '../services/util.service';
 
@@ -12,30 +13,20 @@ import { UtilService } from '../services/util.service';
 export class HomeComponent implements OnInit {
   titlePage = 'Clinic Plus';
 
-  constructor(private title: Title, public utilService: UtilService) {
+  constructor(
+    private title: Title,
+    public utilService: UtilService,
+    private router: Router
+  ) {
     // a?.addEventListener('paste', ($event) => {
     //   $event?.preventDefault();
     //   console.log('Entrou');
     // });
 
-    this.varColors();
+
   }
 
-  varColors() {
-    // document.body.style.setProperty('--cor-um', '#E0E0E0');
-    document.body.style.setProperty('--cor-um', '#f4f9f7');
-    document.body.style.setProperty('--cor-texts', '#343a40');
-    // document.body.style.setProperty('--cor-background-inputs', '#294852');
-    document.body.style.setProperty('--cor-background-inputs', '#80b09e');
-    document.body.style.setProperty('--cor-inputs-active', '#2c4c57d1');
-    document.body.style.setProperty('--cor-inputs-disabled', '#5c4c57d1');
-    document.body.style.setProperty('--cor-btns', '#FFF');
-
-    document.body.style.setProperty('--visible-login', 'none');
-    document.body.style.setProperty('--visible-register', 'none');
-    document.body.style.setProperty('--visible-modal', 'none');
-    document.body.style.setProperty('--visible-homePage', 'flex');
-  }
+  
 
   ngOnInit() {
     this.title.setTitle(this.titlePage);
@@ -135,13 +126,13 @@ export class HomeComponent implements OnInit {
             // console.log('Resultado:' + result);
             // console.log(resultJson.status);
 
-            if (resultJson.message.includes('Page not found')) {
+            if (resultJson?.message?.includes('Page not found')) {
               alert(
                 'Ocorreu um erro. Tente novamente mais tarde ou contate o administrador.'
               );
               return;
             }
-            if (resultJson.status == '404') {
+            if (resultJson?.status == '404') {
               alert('Cadastro não encontrado!');
               return;
             }
@@ -150,7 +141,8 @@ export class HomeComponent implements OnInit {
               resultJson.nome == this.dataForm.nome &&
               resultJson.cpf == this.undoFormatAnyCpf(this.dataForm.cpf)
             ) {
-              alert('Bem-vindo, ' + this.dataForm.nome + '!');
+              // alert('Bem-vindo, ' + this.dataForm.nome + '!');
+              this.router.navigateByUrl('/index');
             } else {
               alert('Cadastro não bate!!');
               return;
