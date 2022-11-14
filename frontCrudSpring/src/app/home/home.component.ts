@@ -13,15 +13,6 @@ export class HomeComponent implements OnInit {
   titlePage = 'Clinic Plus';
 
   constructor(private title: Title, public utilService: UtilService) {
-    const a = document.querySelectorAll('input');
-
-    a.forEach((input) => {
-      input?.addEventListener('paste', ($event) => {
-        $event?.preventDefault();
-        console.log('Entrou');
-      });
-    });
-
     // a?.addEventListener('paste', ($event) => {
     //   $event?.preventDefault();
     //   console.log('Entrou');
@@ -48,6 +39,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle(this.titlePage);
+
+    const a = document.querySelectorAll('input');
+    a.forEach((input) => {
+      input?.addEventListener('contextmenu', ($event) => {
+        $event?.preventDefault();
+      });
+
+      input?.addEventListener('drop', ($event) => {
+        $event?.preventDefault();
+      });
+    });
   }
 
   // interface SignupForm {
@@ -101,13 +103,21 @@ export class HomeComponent implements OnInit {
     document.getElementById('btnLog')?.focus();
   }
 
+  isEnterPressedLogin($event: KeyboardEvent) {
+    if (this.utilService.keyPressIsEnter($event)) this.postLogin();
+  }
+
+  isEnterPressedRegister($event: KeyboardEvent) {
+    if (this.utilService.keyPressIsEnter($event)) this.postRegister();
+  }
+
   public postLogin() {
     if (this.dataForm.cpf == '' || this.dataForm.nome.trim() == '') {
       alert('Insira os dados!!');
       return;
     } else {
       if (!this.TestaCPF()) {
-        alert('Mó cota fazendo isso pra tu colocar CPF inválido :(');
+        alert('Digite um CPF válido!');
         return;
       } else {
         var requestOptions = {
@@ -122,8 +132,15 @@ export class HomeComponent implements OnInit {
           .then((response) => response.text())
           .then((result) => {
             var resultJson = JSON.parse(result);
-            console.log('Resultado:' + result);
-            console.log(resultJson.status);
+            // console.log('Resultado:' + result);
+            // console.log(resultJson.status);
+
+            if (resultJson.message.includes('Page not found')) {
+              alert(
+                'Ocorreu um erro. Tente novamente mais tarde ou contate o administrador.'
+              );
+              return;
+            }
             if (resultJson.status == '404') {
               alert('Cadastro não encontrado!');
               return;
@@ -147,35 +164,65 @@ export class HomeComponent implements OnInit {
   }
 
   public postRegister() {
-    console.log(this.dataForm);
+    // console.log(this.dataForm);
+    // Bernardino - Falcão
+    // 17050-050
+    if (
+      this.dataForm.nome.trim() == '' ||
+      this.dataForm.cpf == '' ||
+      this.dataForm.endereco.trim().length < 10 ||
+      this.dataForm.cep.length != 9 ||
+      this.dataForm.cidade.length < 3 ||
+      (this.dataForm.medico && this.dataForm.crm.length < 7)
+    ) {
+      alert('Insira os dados!!');
+      return;
+    } else {
+      if (!this.TestaCPF()) {
+        alert('Digite um CPF válido!');
+        return;
+      } else {
+        var myHeaders = new Headers();
+        myHeaders.append('Content-Type', 'application/json');
 
-    var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
+        var raw = JSON.stringify({
+          id: null,
+          nome: this.dataForm.nome,
+          cpf: Number(this.undoFormatAnyCpf(this.dataForm.cpf)),
+          excluido: false,
+          endereco: this.dataForm.endereco,
+          cep: Number(this.undoFormatAnyCpf(this.dataForm.cep)),
+          cidade: this.dataForm.cidade,
+          medico: this.dataForm.medico,
+          crm: this.dataForm.crm,
+        });
 
-    var raw = JSON.stringify({
-      id: null,
-      nome: this.dataForm.nome,
-      cpf: Number(this.undoFormatAnyCpf(this.dataForm.cpf)),
-      excluido: false,
-      endereco: this.dataForm.endereco,
-      cep: Number(this.undoFormatAnyCpf(this.dataForm.cep)),
-      cidade: this.dataForm.cidade,
-      medico: this.dataForm.medico,
-      crm: this.dataForm.crm,
-    });
+        // console.log(raw);
 
-    console.log(raw);
+        fetch('https://crudclinics.herokuapp.com/listPersons/ins', {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow',
+          mode: 'cors',
+        })
+          .then((response) => {
+            response.text();
+            // console.log(response.text());
+            // console.log(response);
+            if (response.status == 401) {
+              alert('Erro: uma conta já está vinculada com este CPF!');
+              return;
+            }
+            alert('Cadastrado com sucesso!');
+          })
 
-    fetch('https://crudclinics.herokuapp.com/listPersons/ins', {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-      mode: 'cors',
-    })
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log('error', error));
+          .then((result) => {
+            /*console.log(result)*/
+          })
+          .catch((error) => console.log('error', error));
+      }
+    }
   }
 
   public undoFormatAnyCpf(strCPF: string): string {
@@ -228,6 +275,8 @@ export class HomeComponent implements OnInit {
       cpf = num.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/g, '$1.$2.$3-$4');
     }
 
+    if ((len = 15 || len == 16)) cpf = cpf.substring(0, 14);
+
     this.dataForm.cpf = cpf;
   }
 
@@ -243,13 +292,22 @@ export class HomeComponent implements OnInit {
     var crm = this.dataForm.crm;
     crm = crm.replace('/', '');
 
-    if (crm.length == 5) {
+    var numPart = crm.substring(0, 6).replace(/\s+/g, '').replace(/[^\d]/g, '');
+
+    var lettersPart = crm
+      .toUpperCase()
+      .substring(4, 8)
+      .replace(/\s+/g, '')
+      .replace(/[^a-z0-9]/gi, '');
+
+    if (numPart.length == 4) {
       var numPart = crm
         .substring(0, 4)
         .replace(/\s+/g, '')
         .replace(/[^\d]/g, '');
 
       var lettersPart = crm
+        .toUpperCase()
         .substring(4, 6)
         .replace(/\s+/g, '')
         .replace(/[^a-z0-9]/gi, '');
@@ -258,61 +316,45 @@ export class HomeComponent implements OnInit {
       if (lettersPart.toUpperCase() != '') {
         crm += `/` + lettersPart.toUpperCase().replace(/[0-9]/g, '');
       }
+
       this.dataForm.crm = crm;
       return;
-    }
-
-    if (crm.length == 6) {
+    } else if (numPart.length == 5) {
       var numPart = crm
         .substring(0, 5)
         .replace(/\s+/g, '')
         .replace(/[^\d]/g, '');
 
       var lettersPart = crm
-        .substring(5, 7)
+        .toUpperCase()
+        .substring(4, 7)
         .replace(/\s+/g, '')
         .replace(/[^a-z0-9]/gi, '');
 
-      crm = numPart.replace(/ ([0-9]{1,4}) /g, '$1');
+      crm = numPart.replace(/ ([0-9]{1,5}) /g, '$1');
       if (lettersPart.toUpperCase() != '') {
         crm += `/` + lettersPart.toUpperCase().replace(/[0-9]/g, '');
       }
+
       this.dataForm.crm = crm;
       return;
+    } else {
+      numPart = crm.substring(0, 6).replace(/\s+/g, '').replace(/[^\d]/g, '');
+
+      lettersPart = crm
+        .substring(6, 8)
+        .replace(/\s+/g, '')
+        .replace(/[^a-z0-9]/gi, '');
+
+      crm = numPart.replace(/ ([0-9]{1,6}) /g, '$1');
+      if (lettersPart.toUpperCase() != '') {
+        crm += `/` + lettersPart.toUpperCase().replace(/[0-9]/g, '');
+      }
+
+      //verify if has only the second part
+      if (crm.length < 4 && crm.indexOf(`/`) == 0) this.dataForm.crm = '';
+      else this.dataForm.crm = crm;
     }
-
-    var numPart = crm.substring(0, 6).replace(/\s+/g, '').replace(/[^\d]/g, '');
-
-    var lettersPart = crm
-      .substring(6, 8)
-      .replace(/\s+/g, '')
-      .replace(/[^a-z0-9]/gi, '');
-
-    // var regExp = /[a-zA-Z]/g;
-
-    // if (crm.length <= 3 && regExp.test(numPart)) {
-    //   this.dataForm.crm = '';
-    //   console.log('Entrou');
-
-    //   return;
-    // }
-
-    // 123456/SP
-    crm = numPart.replace(/ ([0-9]{1,6}) /g, '$1');
-    if (lettersPart.toUpperCase() != '') {
-      crm += `/` + lettersPart.toUpperCase().replace(/[0-9]/g, '');
-    }
-    this.dataForm.crm = crm;
-  }
-
-  public setMaskOnlyLetters(input: string) {
-    input = this.removeSpacesInInitial(input);
-
-    // input.value = this.uppercaseFirstLetter(input.value);
-    input = input.replace(
-      /[^a-zA-ZâãàáéèêẽîĩìíôõóòũûúùÂÃÀÁÉÈÊẼÎĨÌÍÔÕÓÒŨÛÚÙ ]/gi,
-      ''
-    );
   }
 
   public setMaskNumbersLettersHyphen(str: string) {
@@ -322,16 +364,5 @@ export class HomeComponent implements OnInit {
       /[^a-zA-ZâãàáéèêẽîĩìíôõóòũûúùÂÃÀÁÉÈÊẼÎĨÌÍÔÕÓÒŨÛÚÙ 0-9]/gi,
       ''
     );
-  }
-
-  public removeSpacesInInitial(str: string): string {
-    do {
-      if (str.charAt(0) === ' ') {
-        str = str.substring(1);
-      } else {
-        break;
-      }
-    } while (true);
-    return str;
   }
 }

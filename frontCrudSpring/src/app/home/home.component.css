@@ -268,7 +268,7 @@ button:nth-child(3) {
     /* border-radius: inherit; */
     border-radius: 0px;
     border-left: var(--cor-background-inputs) 3px solid;
-    width: 35%;
+    width: 45%;
     min-height: calc(100vh);
     min-width: 250px;
     height: 100%;

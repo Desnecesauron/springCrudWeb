@@ -57,9 +57,12 @@
               required=""
               placeholder="Nome"
               [(ngModel)]="dataForm.nome"
-              (keyup)="setMaskOnlyLetters(dataForm.nome)"
-              (paste)="setMaskOnlyLetters(dataForm.nome)"
-              (drop)="setMaskOnlyLetters(dataForm.nome)"
+              (keyup)="
+                dataForm.nome = utilService.setMaskOnlyLetters(dataForm.nome)
+              "
+              (paste)="utilService.setMaskOnlyLetters(dataForm.nome)"
+              (drop)="utilService.setMaskOnlyLetters(dataForm.nome)"
+              (keypress)="isEnterPressedLogin($event)"
             />
           </div>
 
@@ -73,6 +76,7 @@
               [(ngModel)]="dataForm.cpf"
               (keyup)="setMaskCPF()"
               (paste)="setMaskCPF()"
+              (keypress)="isEnterPressedLogin($event)"
               maxlength="14"
             />
           </div>
@@ -132,8 +136,11 @@
               required=""
               placeholder="Nome"
               [(ngModel)]="dataForm.nome"
-              (keyup)="setMaskOnlyLetters(dataForm.nome)"
-              (paste)="setMaskOnlyLetters(dataForm.nome)"
+              (keyup)="
+                dataForm.nome = utilService.setMaskOnlyLetters(dataForm.nome)
+              "
+              (paste)="utilService.setMaskOnlyLetters(dataForm.nome)"
+              (keypress)="isEnterPressedRegister($event)"
             />
           </div>
 
@@ -147,6 +154,7 @@
               [(ngModel)]="dataForm.cpf"
               (keyup)="setMaskCPF()"
               (paste)="setMaskCPF()"
+              (keypress)="isEnterPressedRegister($event)"
               maxlength="14"
             />
           </div>
@@ -160,11 +168,16 @@
               placeholder="Endereço"
               [(ngModel)]="dataForm.endereco"
               (keyup)="
-                dataForm.endereco = removeSpacesInInitial(dataForm.endereco)
+                dataForm.endereco = utilService.removeSpacesInInitial(
+                  dataForm.endereco
+                )
               "
               (paste)="
-                dataForm.endereco = removeSpacesInInitial(dataForm.endereco)
+                dataForm.endereco = utilService.removeSpacesInInitial(
+                  dataForm.endereco
+                )
               "
+              (keypress)="isEnterPressedRegister($event)"
             />
           </div>
 
@@ -178,6 +191,7 @@
               [(ngModel)]="dataForm.cep"
               (keyup)="setMaskCEP()"
               (paste)="setMaskCEP()"
+              (keypress)="isEnterPressedRegister($event)"
               maxlength="9"
             />
           </div>
@@ -189,10 +203,14 @@
               id="CityText"
               required=""
               placeholder="Cidade"
-              (paste)="utilService.blockPaste($event)"
               [(ngModel)]="dataForm.cidade"
-              (keyup)="setMaskOnlyLetters(dataForm.cidade)"
-              (paste)="setMaskOnlyLetters(dataForm.cidade)"
+              (keyup)="
+                dataForm.cidade = utilService.setMaskOnlyLetters(
+                  dataForm.cidade
+                )
+              "
+              (paste)="utilService.setMaskOnlyLetters(dataForm.cidade)"
+              (keypress)="isEnterPressedRegister($event)"
             />
           </div>
 
@@ -231,9 +249,12 @@
               id="CrmText"
               required=""
               placeholder="CRM"
+              (contextmenu)="utilService.blockEvent($event)"
+              (drop)="utilService.blockEvent($event)"
               [(ngModel)]="dataForm.crm"
               (keyup)="setMaskCRM()"
               (paste)="setMaskCRM()"
+              (keypress)="isEnterPressedRegister($event)"
             />
           </div>
         </div>
