@@ -1,6 +1,7 @@
 <div class="headComponent">
   <p>header-app works!</p>
-  <a>Conta</a>
-  <p>CRM:xxxxx</p>
-  <a>Sair</a>
+  <a *ngIf="this.dataUser"> {{ dataUser.nome }} </a>
+  <p *ngIf="this.dataUser && hasCRM">CRM: {{ dataUser.crm }}</p>
+
+  <a routerLink="/">Sair</a>
 </div>

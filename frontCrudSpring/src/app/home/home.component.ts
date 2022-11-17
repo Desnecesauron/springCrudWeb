@@ -3,6 +3,8 @@ import { Component, createComponent, OnInit } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { __values } from 'tslib';
+import { DataUser } from '../interfaces/data-user';
+import { JwtServicesService } from '../services/jwt-services.service';
 import { UtilService } from '../services/util.service';
 
 @Component({
@@ -15,18 +17,15 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private title: Title,
+    private router: Router,
     public utilService: UtilService,
-    private router: Router
+    public jwtService: JwtServicesService
   ) {
     // a?.addEventListener('paste', ($event) => {
     //   $event?.preventDefault();
     //   console.log('Entrou');
     // });
-
-
   }
-
-  
 
   ngOnInit() {
     this.title.setTitle(this.titlePage);
@@ -48,15 +47,7 @@ export class HomeComponent implements OnInit {
 
   // }
 
-  public dataForm: {
-    nome: string;
-    cpf: string;
-    endereco: string;
-    cep: string;
-    cidade: string;
-    medico: boolean;
-    crm: string;
-  } = {
+  protected dataForm: DataUser = {
     nome: '',
     cpf: '',
     endereco: '',
@@ -124,6 +115,8 @@ export class HomeComponent implements OnInit {
           .then((result) => {
             var resultJson = JSON.parse(result);
             // console.log('Resultado:' + result);
+            // console.log(result);
+            // console.log(resultJson);
             // console.log(resultJson.status);
 
             if (resultJson?.message?.includes('Page not found')) {
@@ -142,6 +135,7 @@ export class HomeComponent implements OnInit {
               resultJson.cpf == this.undoFormatAnyCpf(this.dataForm.cpf)
             ) {
               // alert('Bem-vindo, ' + this.dataForm.nome + '!');
+              this.jwtService.encrypt(result, 'jsonUser');
               this.router.navigateByUrl('/index');
             } else {
               alert('Cadastro não bate!!');

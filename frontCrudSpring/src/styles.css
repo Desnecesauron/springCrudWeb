@@ -15,3 +15,15 @@ body {
 html {
   background-color: #e2e2e2;
 }
+
+input,
+button {
+  color: var(--cor-btns);
+  text-transform: initial;
+}
+
+input:disabled,
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

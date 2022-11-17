@@ -134,7 +134,7 @@
   border-bottom: 1px solid #555;
   background: transparent;
   min-width: 212px;
-  width: 20%;
+  /* width: 20%; */
   padding: 8px 0 5px 0;
   font-size: 16px;
   transition: all 0.3s ease-in-out;
@@ -148,6 +148,7 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
+  justify-items: center;
 }
 
 .box div input:hover,
@@ -171,7 +172,8 @@
 .bg.img {
   width: 100%;
   height: 100%;
-  background-image: url(../../assets/imgs/imgBg.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url(../../assets/imgs/imgBg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   filter: blur(5px);
@@ -205,8 +207,10 @@
 
 .title--inside {
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .modal {
@@ -224,18 +228,6 @@
 
 .modal > .register {
   display: var(--visible-register);
-}
-
-input,
-button {
-  color: var(--cor-btns);
-  text-transform: initial;
-}
-
-input:disabled,
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 button#register {
@@ -283,7 +275,7 @@ button:nth-child(3) {
     /* border-radius: inherit; */
     border-radius: 0px;
     border-left: var(--cor-background-inputs) 3px solid;
-    width: 45%;
+    width: 40%;
     min-height: calc(100vh);
     min-width: 250px;
     height: 100%;
