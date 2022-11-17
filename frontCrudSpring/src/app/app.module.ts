@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderAppComponent } from './header-app/header-app.component';
+import { CanActivateGuard } from './guards/can-activate.guard';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { HeaderAppComponent } from './header-app/header-app.component';
     HeaderAppComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [Title],
+  providers: [Title, CanActivateGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {
