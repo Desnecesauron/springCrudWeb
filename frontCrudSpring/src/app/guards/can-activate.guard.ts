@@ -7,12 +7,16 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JwtServicesService } from '../services/jwt-services.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CanActivateGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private jwtServicesService: JwtServicesService
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,12 +27,16 @@ export class CanActivateGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (localStorage.getItem('jsonUser')) {
-      console.log('Tem algo');
-      return true;
-    } else {
-      console.log('Tem nada');
-      this.router.navigate(['/']);
-      return false;
+      // console.log('Tem algum dado');
+      if (this.jwtServicesService.decrypt('jsonUser') != 'failure') {
+        // console.log('Tem algo');
+        return true;
+      }
+      // console.log('Dado possivelmente zuado');
     }
+
+    // console.log('Não colou');
+    this.router.navigate(['/']);
+    return false;
   }
 }

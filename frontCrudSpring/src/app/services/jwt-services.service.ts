@@ -29,11 +29,21 @@ export class JwtServicesService {
   decrypt(pathData: string) {
     this.encryptedMessage = localStorage.getItem(pathData);
 
-    this.decryptedMessage = CryptoJS.AES.decrypt(
-      this.encryptedMessage,
-      this.password.trim()
-    ).toString(CryptoJS.enc.Utf8);
-    return JSON.parse(this.decryptedMessage);
+    try {
+      this.decryptedMessage = CryptoJS.AES.decrypt(
+        this.encryptedMessage,
+        this.password.trim()
+      ).toString(CryptoJS.enc.Utf8);
+
+      // console.log(this.decryptedMessage);
+
+      return JSON.parse(this.decryptedMessage);
+    } catch {
+      return 'failure';
+    }
+
+    // console.log(this.decryptedMessage);
+
     // console.log(JSON.parse(this.decryptedMessage));
   }
 }

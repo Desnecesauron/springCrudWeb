@@ -8,6 +8,7 @@ import { IndexComponent } from './index/index.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderAppComponent } from './header-app/header-app.component';
 import { CanActivateGuard } from './guards/can-activate.guard';
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { CanActivateGuard } from './guards/can-activate.guard';
     HomeComponent,
     HeaderAppComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, MatIconModule],
   providers: [Title, CanActivateGuard],
   bootstrap: [AppComponent],
 })

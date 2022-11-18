@@ -1,16 +1,9 @@
 <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-  integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
-/>
-<link
   href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet"
 />
 
@@ -46,16 +39,16 @@
             id="linkBackPageLog"
             (click)="closeLogin()"
           >
-            <i class="fa fa-angle-left"></i>
+            <span class="material-icons"> arrow_back </span>
           </button>
 
           <div class="textNome">
             <div class="titleInput">Nome</div>
+
             <input
               type="text"
               id="NameTextReg"
               required=""
-              placeholder="Nome"
               [(ngModel)]="dataForm.nome"
               (keyup)="
                 dataForm.nome = utilService.setMaskOnlyLetters(dataForm.nome)
@@ -64,27 +57,29 @@
               (drop)="utilService.setMaskOnlyLetters(dataForm.nome)"
               (keypress)="isEnterPressedLogin($event)"
             />
+            <span class="material-icons"> account_circle </span>
           </div>
 
           <div class="textCpf">
             <div class="titleInput">CPF</div>
+
             <input
               type="text"
               id="CpfText"
               required=""
-              placeholder="CPF"
               [(ngModel)]="dataForm.cpf"
               (keyup)="setMaskCPF()"
               (paste)="setMaskCPF()"
               (keypress)="isEnterPressedLogin($event)"
               maxlength="14"
             />
+            <span class="material-icons regLog"> badge </span>
           </div>
         </div>
 
         <button type="button" class="slide" (click)="postLogin()">
           <div>Login</div>
-          <i class="icon-login"></i>
+          <span class="material-icons"> login </span>
         </button>
 
         <div class="cadastrar">
@@ -125,16 +120,16 @@
             id="linkBackPageReg"
             (click)="closeRegister()"
           >
-            <i class="fa fa-angle-left"></i>
+            <span class="material-icons"> arrow_back </span>
           </button>
 
           <div class="textNome">
             <div class="titleInput">Nome</div>
+
             <input
               type="text"
               id="NameTextReg"
               required=""
-              placeholder="Nome"
               [(ngModel)]="dataForm.nome"
               (keyup)="
                 dataForm.nome = utilService.setMaskOnlyLetters(dataForm.nome)
@@ -142,30 +137,32 @@
               (paste)="utilService.setMaskOnlyLetters(dataForm.nome)"
               (keypress)="isEnterPressedRegister($event)"
             />
+            <span class="material-icons"> account_circle </span>
           </div>
 
           <div class="textCpf">
             <div class="titleInput">CPF</div>
+
             <input
               type="text"
               id="CpfText"
               required=""
-              placeholder="CPF"
               [(ngModel)]="dataForm.cpf"
               (keyup)="setMaskCPF()"
               (paste)="setMaskCPF()"
               (keypress)="isEnterPressedRegister($event)"
               maxlength="14"
             />
+            <span class="material-icons regLog"> badge </span>
           </div>
 
           <div class="textEndereco">
             <div class="titleInput">Endereço</div>
+
             <input
               type="text"
               id="EndText"
               required=""
-              placeholder="Endereço"
               [(ngModel)]="dataForm.endereco"
               (keyup)="
                 dataForm.endereco = utilService.removeSpacesInInitial(
@@ -179,30 +176,32 @@
               "
               (keypress)="isEnterPressedRegister($event)"
             />
+            <span class="material-icons"> location_on </span>
           </div>
 
           <div class="textCep">
             <div class="titleInput">CEP</div>
+
             <input
               type="text"
               id="CepText"
               required=""
-              placeholder="CEP"
               [(ngModel)]="dataForm.cep"
               (keyup)="setMaskCEP()"
               (paste)="setMaskCEP()"
               (keypress)="isEnterPressedRegister($event)"
               maxlength="9"
             />
+            <span class="material-icons"> local_shipping </span>
           </div>
 
           <div class="textCidade">
             <div class="titleInput">Cidade</div>
+
             <input
               type="text"
               id="CityText"
               required=""
-              placeholder="Cidade"
               [(ngModel)]="dataForm.cidade"
               (keyup)="
                 dataForm.cidade = utilService.setMaskOnlyLetters(
@@ -212,6 +211,7 @@
               (paste)="utilService.setMaskOnlyLetters(dataForm.cidade)"
               (keypress)="isEnterPressedRegister($event)"
             />
+            <span class="material-icons"> location_city </span>
           </div>
 
           <div class="checkCRM">
@@ -248,7 +248,6 @@
               type="text"
               id="CrmText"
               required=""
-              placeholder="CRM"
               [disabled]="!dataForm.medico"
               (contextmenu)="utilService.blockEvent($event)"
               (drop)="utilService.blockEvent($event)"
@@ -257,12 +256,13 @@
               (paste)="setMaskCRM()"
               (keypress)="isEnterPressedRegister($event)"
             />
+            <span class="material-icons"> medical_services </span>
           </div>
         </div>
 
         <button type="button" class="slide" (click)="postRegister()">
           <div>Cadastre-se</div>
-          <i class="icon-note"></i>
+          <span class="material-icons"> person_add </span>
         </button>
       </div>
     </div>
@@ -315,12 +315,13 @@
 
         <button type="button" class="slide" id="btnLog" (click)="openLogin()">
           <div>Login</div>
-          <i class="icon-login"></i>
+          <span class="material-icons"> login </span>
         </button>
 
         <button type="button" class="slide" (click)="openRegister()">
           <div>Cadastre-se</div>
-          <i class="icon-note"></i>
+          <span class="material-icons"> person_add </span>
+          <!-- <span class="material-icons"> app_registration </span> -->
         </button>
       </div>
     </div>
